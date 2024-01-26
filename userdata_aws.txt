@@ -1,0 +1,23 @@
+#! /bin/bash
+sudo su
+yum update -y
+yum install -y httpd
+systemctl start httpd.service
+systemctl enable httpd.service
+echo "<h1>My Name is Bond. James Bond...006. $(hostname -f)</h1>" > /var/www/html/index.html
+
+========================================================================================
+Connect to the instance from windows powershell
+ssh -i "viit-key.pem" ec2-user@ec2-13-127-93-42.ap-south-1.compute.amazonaws.com
+
+=============================================================================================
+Run these commands on local machine
+commands to copy folder from local machine to ec2 server
+on ec2 server create a folder:  data
+	> mkdir data
+	> pwd 
+use the following command:
+sudo scp -i "./viit-key.pem" -r "./SampleWebSite/" ec2-user@ec2-13-201-192-45.ap-south-1.compute.amazonaws.com:/home/ec2-user/data/
+=======================================================================================
+commands to copy the files  from EC2 /data folder to /var/www/html folder
+sudo cp -r ./data/SampleWebSite/* /var/www/html
